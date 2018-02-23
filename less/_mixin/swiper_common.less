@@ -1,0 +1,183 @@
+@import "lib-function";
+@import "lib-para";
+@import "lib-animation";
+@import "lib-config";
+
+
+.swiper-container, body, html {
+  height: 100%
+}
+
+.swiper-wrapper {
+  width: 640rem/@basenumber;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-slide{
+
+  width: 640rem/@basenumber;
+  .lessTransform(translate3d(0,0,0));
+  &:last-child{
+    .swiper-slide-arrow-bottom {
+      display: none;
+    }
+  }
+
+
+  .mask {
+    position: absolute;
+    z-index: 2000;
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    .lessAnimation(aniMaskFadeInHide, 1s, ease, 0.1s, 1, normal, both);
+  }
+  .shareTip {
+    position: absolute;
+    z-index: 2001;
+    width: 227rem/@base-font-size;
+    height: 372rem/@base-font-size;
+    right: 15px;
+    top: 0;
+    //background-image: url("@{img-url}/share_tip.png");
+    //background-size: 227rem/@base-font-size  372rem/@base-font-size;
+    visibility: hidden;
+    opacity: 0;
+    .lessAnimation(aniSlideDownHide, 1s, ease, 0.1s, 1, normal, both);
+  }
+  .shareTip-arrow {
+    display: block;
+    width: 227rem/@base-font-size;
+    height: 220rem/@base-font-size;
+    background: url("@{img-url}/xyz-share-tip.png") 0 0 no-repeat;
+    background-size: 227rem/@base-font-size;
+  }
+
+  .shareTip-text {
+    margin-top: -20rem/@base-font-size;
+    margin-left: -140rem/@base-font-size;
+    display: block;
+    width: 227rem/@base-font-size;
+    height: 172rem/@base-font-size;
+    background: url("@{img-url}/xyz-share-tip.png") 0 -220rem/@base-font-size no-repeat;
+    background-size: 227rem/@base-font-size  372rem/@base-font-size;
+  }
+}
+.swiper-slide-arrow-bottom {
+  opacity: 0;
+  position: absolute;
+  bottom: 30rem/@basenumber;
+  left: 50%;
+  margin-left: 42rem/@basenumber/(-2);
+  width: 42rem/@basenumber;
+  height: 33rem/@basenumber;
+  background-image: url("@{img-url}/swiper-slide-arrow-bottom.png");
+  background-size: 42rem/@basenumber 33rem/@basenumber;
+  z-index: 999;
+}
+
+.swiper-slide.swiper-slide-active {
+  .swiper-slide-arrow-bottom {
+    .lessAnimation(aniSlideUpShow, 1.6s, ease, 0s, infinite, normal, forwards);
+  }
+
+  .addMask {
+    visibility: visible;
+    opacity: 0.7;
+    .lessAnimation(aniMaskFadeInShow, 0.7s, ease, 0.1s, 1, normal, both);
+  }
+  .addShareTip {
+    visibility: visible;
+    opacity: 1;
+    .lessAnimation(aniSlideUpShow, 0.7s, ease, 0s, 1, normal, forwards);
+  }
+}
+
+
+//向上滑动显示
+#createKeyFrames(aniSlideUpShow, @aniSlideUpShow);
+//向下滑动隐藏
+#createKeyFrames(aniSlideDownHide, @aniSlideDownHide);
+#createKeyFrames(aniSlideDownShow, @aniSlideDownShow);
+//淡入
+#createKeyFrames(aniFadeInShow, @aniFadeInShow);
+#createKeyFrames(aniFadeInHide, @aniFadeInHide);
+#createKeyFrames(aniZoomInBounceFlashShow, @aniZoomInBounceFlashShow);
+
+
+@aniMaskFadeInShow: { 0% {
+  opacity: 0;
+  #translate3d(0, 0, 0);
+  visibility: hidden;
+} 100% {
+    #translate3d(0, 0, 0);
+    opacity: 0.6;
+    visibility: visible;
+  } };
+@aniMaskFadeInHide: { 0% {
+  #translate3d(0, 0, 0);
+  opacity: 0.6;
+  visibility: visible;
+} 100% {
+    opacity: 0;
+    #translate3d(0, 0, 0);
+    visibility: hidden;
+  } };
+
+
+//音乐
+.swiper-music-box {
+  position: absolute;
+  top: 40rem/@base-font-size;
+  left: 50%;
+  margin-left: 480rem/@base-font-size/(2);
+  width: 100rem/@base-font-size;
+  height: 100rem/@base-font-size;
+  z-index: 999;
+}
+
+.swiper-music-icon {
+  display: inline-block;
+  width: 48rem/@base-font-size;
+  height: 48rem/@base-font-size;
+  background-image: url("@{img-url}/swiper-music-icon.png");
+  background-size: 48rem/@base-font-size 48rem/@base-font-size;
+}
+
+.swiper-music-box {
+  .swiper-music-icon {
+    display: block;
+  }
+}
+
+.swiper-music-icon-playing {
+  .lessAnimation(aniMusicPlaying, 1.6s, linear, 0s, infinite, normal, both);
+}
+
+.swiper-music-icon-stop {
+  .lessAnimation(aniMusicStop, 1.6s, linear, 0s, infinite, normal, both);
+}
+
+@aniMusicPlaying: { 0% {
+  opacity: 1;
+  #transform(rotate(0));
+  visibility: visible;
+} 100% {
+    opacity: 1;
+    #transform(rotate(360deg));
+    visibility: visible;
+  } };
+@aniMusicStop: { 0% {
+  opacity: 1;
+  visibility: visible;
+} 100% {
+    opacity: 1;
+    visibility: visible;
+  } };
+//音乐播放器旋转
+#createKeyFrames(aniMusicPlaying, @aniMusicPlaying);

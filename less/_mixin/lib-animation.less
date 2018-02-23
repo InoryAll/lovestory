@@ -1,0 +1,237 @@
+@import "lib-para.less";
+@import "lib-function.less";
+
+@ani-count-1: 1;
+@ani-count-infinite: infinite;
+@ani-time-function-cubic: cubic-bezier(0.86, 0, 0.07, 1);
+//动画库，配合
+#scale(@opt) {
+  @{vendor}transform: scale(@opt);
+}
+
+#rotate(@opt) {
+  @{vendor}transform: rotate(@opt);
+}
+
+#translate3d(@x,@y,@z) {
+  @{vendor}transform: translate3d(@x,@y,@z);
+}
+
+#translate(@x,@y) {
+  @{vendor}transform: translate(@x,@y);
+}
+
+#skew3d(@x,@y,@z) {
+  @{vendor}transform: skew3d(@x,@y,@z);
+}
+
+#transform(@transform) {
+  @{vendor}transform: @transform;
+}
+#animation-timing-function(@animation-timing-function){
+  @{vendor}animation-timing-function: @animation-timing-function;
+}
+//烟花效果
+//#createKeyFrames(yanhua, @aniYanhuan);
+//.lessAnimation(yanhua, 2.2s, ease-out, 0.6s, infinite, normal, both);
+@aniYanhuan: { 0% {
+  #scale(0.1);
+  opacity: 0;
+} 80% {
+    #scale(1);
+    opacity: 1;
+  } 100% {
+      opacity: 0;
+    } };
+//向上滑动显示
+//#createKeyFrames(aniSlideUpShow, @aniSlideUpShow);
+//.lessAnimation(aniSlideUpShow, 0.75s, ease-out, 1.6s, 1, normal, both);
+@aniSlideUpShow: { 0% {
+  #translate3d(0, 50rem/@base-font-size, 0);
+  opacity: 0;
+} 100% {
+    #translate3d(0, 0rem/@base-font-size, 0);
+    opacity: 1;
+  } };
+//向下滑动显示
+//#createKeyFrames(aniSlideUpShow, @aniSlideDownShow);
+//.lessAnimation(aniSlideUpShow, 0.75s, ease-out, 1.6s, 1, normal, both);
+@aniSlideDownShow: { 0% {
+  #translate3d(0, -50rem/@base-font-size, 0);
+  opacity: 0;
+} 100% {
+    #translate3d(0, 0rem/@base-font-size, 0);
+    opacity: 1;
+  } };
+//向下滑动隐藏
+//#createKeyFrames(aniSlideUpShow, @aniSlideDownShow);
+//.lessAnimation(aniSlideUpShow, 0.75s, ease-out, 1.6s, 1, normal, both);
+@aniSlideDownHide: { 0% {
+  #translate3d(0, 0rem/@base-font-size, 0);
+  opacity: 1;
+} 100% {
+    #translate3d(0, 50rem/@base-font-size, 0);
+    opacity: 0;
+  } };
+//左侧淡入
+//#createKeyFrames(aniSlideInLeftShow, @aniSlideInLeftShow);
+//.lessAnimation(aniSlideInLeftShow, 0.75s, ease-out, 1.6s, 1, normal, both);
+@aniSlideInLeftShow: { 0% {
+  #translate3d(-50rem/@base-font-size, 0, 0);
+  opacity: 0;
+} 100% {
+    #translate3d(0, 0rem/@base-font-size, 0);
+    opacity: 1;
+  } };
+//右侧侧淡入
+//#createKeyFrames(aniSlideInRightShow, @aniSlideInRightShow);
+//.lessAnimation(aniSlideInRightShow, 0.75s, ease-out, 1.6s, 1, normal, both);
+@aniSlideInRightShow: { 0% {
+  #translate3d(50rem/@base-font-size, 0, 0);
+  opacity: 0;
+} 100% {
+    #translate3d(0, 0rem/@base-font-size, 0);
+    opacity: 1;
+  } };
+//淡入显示
+//#createKeyFrames(aniSlideUpShow, @aniFadeInShow);
+//.lessAnimation(aniSlideUpShow, 0.75s, ease-out, 1.6s, 1, normal, both);
+@aniFadeInShow: { 0% {
+  opacity: 0;
+  #translate3d(0, 0, 0);
+} 100% {
+    #translate3d(0, 0, 0);
+    opacity: 1;
+  } };
+@aniFadeInHide: { 0% {
+  #translate3d(0, 0, 0);
+  opacity: 1;
+} 100% {
+    opacity: 0;
+    #translate3d(0, 0, 0);
+  } };
+@aniZoomInShow: { 0% {
+  opacity: 0;
+  #scale(0.5);
+} 100% {
+    opacity: 1;
+    #scale(1);
+  } };
+@aniZoomInBounceShow: { 0% {
+  opacity: 0;
+  #scale(0.3);
+  visibility: hidden;
+} 50% {
+    opacity: 1;
+    #scale(1.1);
+    visibility: visible;
+  } 100% {
+      opacity: 1;
+      #scale(1);
+      visibility: visible;
+    } };
+@aniHeart: { 0% {
+  #scale(0.9);
+} 50% {
+    #scale(1.1);
+    visibility: visible;
+  } 100% {
+      #scale(0.9);
+    } };
+//云朵左右漂浮效果
+@aniClouds: { 0% {
+  #translate3d(50rem/@base-font-size, 0, 0);
+} 50% {
+    #translate3d(0rem/@base-font-size, 0, 0);
+  } 100% {
+      #translate3d(-50rem/@base-font-size, 0, 0);
+    } };
+//云朵下雨效果
+@aniRain: { 0% {
+  box-shadow: rgba(0, 0, 0, 0) 30rem/@base-font-size 30rem/@base-font-size,
+  rgba(0, 0, 0, 0) 40rem/@base-font-size 40rem/@base-font-size,
+  #000 50rem/@base-font-size 75rem/@base-font-size,
+  #000 55rem/@base-font-size 50rem/@base-font-size,
+  #000 70rem/@base-font-size 100rem/@base-font-size,
+  #000 80rem/@base-font-size 95rem/@base-font-size,
+  #000 110rem/@base-font-size 45rem/@base-font-size,
+  #000 90rem/@base-font-size 35rem/@base-font-size;
+} 25% {
+    box-shadow: #000 30rem/@base-font-size 45rem/@base-font-size,
+    #000 40rem/@base-font-size 60rem/@base-font-size,
+    #000 50rem/@base-font-size 90rem/@base-font-size,
+    #000 55rem/@base-font-size 65rem/@base-font-size,
+    rgba(0, 0, 0, 0) 70rem/@base-font-size 120rem/@base-font-size,
+    rgba(0, 0, 0, 0) 80rem/@base-font-size 120rem/@base-font-size,
+    #000 110rem/@base-font-size 70rem/@base-font-size,
+    #000 90rem/@base-font-size 60rem/@base-font-size;
+  } 26% {
+      box-shadow: #000 30rem/@base-font-size 45rem/@base-font-size,
+      #000 40rem/@base-font-size 60rem/@base-font-size,
+      #000 50rem/@base-font-size 90rem/@base-font-size,
+      #000 55rem/@base-font-size 65rem/@base-font-size,
+      rgba(0, 0, 0, 0) 70rem/@base-font-size 40rem/@base-font-size,
+      rgba(0, 0, 0, 0) 80rem/@base-font-size 20rem/@base-font-size,
+      #000 110rem/@base-font-size 70rem/@base-font-size,
+      #000 90rem/@base-font-size 60rem/@base-font-size;
+    } 50% {
+        box-shadow: #000 30rem/@base-font-size 70rem/@base-font-size,
+        #000 40rem/@base-font-size 80rem/@base-font-size,
+        rgba(0, 0, 0, 0) 50rem/@base-font-size 100rem/@base-font-size,
+        #000 55rem/@base-font-size 80rem/@base-font-size,
+        #000 70rem/@base-font-size 60rem/@base-font-size,
+        #000 80rem/@base-font-size 45rem/@base-font-size,
+        #000 110rem/@base-font-size 95rem/@base-font-size,
+        #000 90rem/@base-font-size 85rem/@base-font-size;
+      } 51% {
+          box-shadow: #000 30rem/@base-font-size 70rem/@base-font-size,
+          #000 40rem/@base-font-size 80rem/@base-font-size,
+          rgba(0, 0, 0, 0) 50rem/@base-font-size 45rem/@base-font-size,
+          #000 55rem/@base-font-size 80rem/@base-font-size,
+          #000 70rem/@base-font-size 60rem/@base-font-size,
+          #000 80rem/@base-font-size 45rem/@base-font-size,
+          #000 110rem/@base-font-size 95rem/@base-font-size,
+          #000 90rem/@base-font-size 85rem/@base-font-size;
+        } 75% {
+            box-shadow: #000 30rem/@base-font-size 95rem/@base-font-size,
+            #000 40rem/@base-font-size 100rem/@base-font-size,
+            #000 50rem/@base-font-size 60rem/@base-font-size,
+            rgba(0, 0, 0, 0) 55rem/@base-font-size 95rem/@base-font-size,
+            #000 70rem/@base-font-size 80rem/@base-font-size,
+            #000 80rem/@base-font-size 70rem/@base-font-size,
+            rgba(0, 0, 0, 0) 110rem/@base-font-size 120rem/@base-font-size,
+            rgba(0, 0, 0, 0) 90rem/@base-font-size 110rem/@base-font-size;
+          } 76% {
+              box-shadow: #000 30rem/@base-font-size 95rem/@base-font-size,
+              #000 40rem/@base-font-size 100rem/@base-font-size,
+              #000 50rem/@base-font-size 60rem/@base-font-size,
+              rgba(0, 0, 0, 0) 55rem/@base-font-size 35rem/@base-font-size,
+              #000 70rem/@base-font-size 80rem/@base-font-size,
+              #000 80rem/@base-font-size 70rem/@base-font-size,
+              rgba(0, 0, 0, 0) 110rem/@base-font-size 25rem/@base-font-size,
+              rgba(0, 0, 0, 0) 90rem/@base-font-size 15rem/@base-font-size;
+            } 100% {
+                box-shadow: rgba(0, 0, 0, 0) 30rem/@base-font-size 120rem/@base-font-size,
+                rgba(0, 0, 0, 0) 40rem/@base-font-size 120rem/@base-font-size,
+                #000 50rem/@base-font-size 75rem/@base-font-size,
+                #000 55rem/@base-font-size 50rem/@base-font-size,
+                #000 70rem/@base-font-size 100rem/@base-font-size,
+                #000 80rem/@base-font-size 95rem/@base-font-size,
+                #000 110rem/@base-font-size 45rem/@base-font-size,
+                #000 90rem/@base-font-size 35rem/@base-font-size;
+              } };
+
+
+@aniZoomInBounceFlashShow: { 0% {
+  opacity: 0;
+  #scale(0.1);
+  visibility: hidden;
+} 50% {
+    opacity: 1;
+    #scale(1.5);
+    visibility: visible;
+  } 100% {
+      opacity: 1;
+      #scale(1);
+      visibility: visible;
+    } };
